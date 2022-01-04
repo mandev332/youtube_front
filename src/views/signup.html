@@ -1,0 +1,38 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Material Icons -->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- CSS File -->
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Youtube</title>
+  </head>
+  <body class="signup">
+   
+      <div class="signup__container">
+        <img src="../image/youtube.png" alt="youtube"/>
+      <form class="signup__form" action="/api/register" method="POST" enctype="multipart/form-data">
+        <h1 class="signup__title">Sign-Up</h1>
+           <label>
+               <p>Username:</p> 
+               <input name="username" type="text" placeholder="username" autocomplete="off">
+           </label>
+           <label>
+            <p>Password:</p> 
+            <input name="password" type="password" placeholder="password" autocomplete="off">
+           </label>
+           <label class="file-label">
+            <p>Profile Image:</p> 
+            <input name="img_url" class="file-input" type="file">
+           </label>
+           <button type="submit" class="signup_button">Sign-up</button>
+        </form>
+        
+       
+      </div>
+  </body>
+</html>

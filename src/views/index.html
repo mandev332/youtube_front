@@ -1,0 +1,71 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Material Icons -->
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- CSS File -->
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Youtube</title>
+  </head>
+  <body>
+    <!-- Header Starts -->
+    <div class="header">
+      <div class="header__left">
+        <i id="menu" class="material-icons">menu</i>
+        <img src="../image/youtube.png" alt="" />
+      </div>
+
+      <div id="searchBox" class="header__search">
+        <form class="search-form" method="GET">
+          <input
+            class="search-input"
+            type="text"
+            autocomplete="off"
+            placeholder="Search"
+          />
+          <button type="submit"><i class="material-icons">search</i></button>
+        </form>
+        <div id="searchResults"></div>
+      </div>
+
+      <div class="header__icons">
+        <a href="/upload">
+          <i class="material-icons">videocam</i>
+        </a>
+        <i class="material-icons">apps</i>
+        <i class="material-icons">notifications</i>
+        <a class="profile-img-link" href="/admin">
+          <!-- <img class="profile-image" src="/image/profile.jpg" alt=""> -->
+          <i class="material-icons display-this">account_circle</i>
+        </a>
+      </div>
+    </div>
+    <!-- Header Ends -->
+
+    <!-- Main Body Starts -->
+    <div class="mainBody">
+      <!-- Sidebar Starts -->
+
+      <div id="sidebar" class="sidebar"></div>
+      <!-- Sidebar Ends -->
+
+      <!-- Videos Section -->
+      <div class="videos">
+        <h1 class="video-title">All videos:</h1>
+        <div id="videoContainer" class="videos__container"></div>
+      </div>
+    </div>
+    <!-- Main Body Ends -->
+
+    <script src="./js/fetch.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
