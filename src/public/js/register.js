@@ -1,6 +1,11 @@
 const zmdi_account = document.querySelector(".zmdi-account");
 const zmdi_lock = document.querySelector(".zmdi-lock");
 
+let localuserId = localStorage.getItem("token");
+if (localuserId) {
+  window.location = "/index";
+}
+
 submitButton.onclick = async (event) => {
   try {
     event.preventDefault();
@@ -18,7 +23,7 @@ submitButton.onclick = async (event) => {
 
     window.localStorage.setItem("userId", response.userId);
     window.localStorage.setItem("token", response.token);
-    window.localStorage.setItem("bod", newUser);
+
     let formData = new FormData();
     formData.append("image", uploadInput.files[0]);
     formData.append("userId", response.userId);
