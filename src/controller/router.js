@@ -1,7 +1,7 @@
 module.exports = {
   GET: function (req, res) {
-    console.log(req.pathname);
-    res.end();
+    console.log("GET");
+    res.end("GET");
   },
   POST: function (req, res) {
     console.log("POST");

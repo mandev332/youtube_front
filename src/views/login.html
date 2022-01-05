@@ -1,45 +1,47 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Material Icons -->
-
+    <title>Login Page</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <!-- CSS File -->
-    <link rel="stylesheet" href="./css/styles.css" />
-    <title>Youtube</title>
+    <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="./css/material-design-iconic-font.css" />
+    <link rel="stylesheet" href="./css/material-design-iconic-font.min.css" />
   </head>
-  <body class="signup">
-    <div class="signup__container">
-      <img src="../image/youtube.png" alt="youtube" />
-      <form class="signup__form" action="/api/login" method="POST">
-        <h1 class="signup__title">Login</h1>
-        <label>
-          <p>Username:</p>
-          <input
-            name="username"
-            type="text"
-            placeholder="username"
-            autocomplete="off"
-          />
-        </label>
-        <label>
-          <p>Password:</p>
-          <input
-            name="password"
-            type="password"
-            placeholder="password"
-            autocomplete="off"
-          />
-        </label>
-        <button type="submit" class="signup_button">Login</button>
-      </form>
-      <a class="signup__account-create" href="/signup">Create an Account?</a>
+  <body>
+    <div class="container">
+      <div class="wrapper sign-in">
+        <form action="#" class="site-form">
+          <h1 class="title">Sign in</h1>
+          <label>
+            <span class="zmdi zmdi-account"></span>
+            <input type="text" id="usernameInput" placeholder="Your name" />
+          </label>
+          <label>
+            <span class="zmdi zmdi-lock"></span>
+            <input type="password" id="passwordInput" placeholder="Password" />
+            <button
+              class="zmdi zmdi-eye"
+              id="showButton"
+              type="button"
+            ></button>
+          </label>
+          <input type="submit" value="Log in" id="submitButton" />
+        </form>
+        <a href="./register.html" class="sign-link">Create an account</a>
+        <img
+          src="img/signin-image.jpg"
+          alt="signin-image"
+          class="signin-image"
+        />
+      </div>
     </div>
+    <script src="./js/login.js"></script>
   </body>
 </html>
