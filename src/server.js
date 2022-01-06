@@ -2,7 +2,6 @@ const express = require("express");
 const PORT = process.env.PORT || 7000;
 const path = require("path");
 const app = new express();
-const contr = require("./controller/router.js");
 const ejs = require("ejs");
 
 app.engine("html", ejs.renderFile);

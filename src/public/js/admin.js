@@ -53,10 +53,9 @@ submitButton.onclick = async (event) => {
     videoInput.value = null;
     uploadInput.value = null;
     let res = await request("/uploadvideo", "POST", formData);
-    console.log(res);
     renderVideoss(userId);
   } catch (error) {
-    console.log(error);
+    console.log(error.massage);
   }
 };
 

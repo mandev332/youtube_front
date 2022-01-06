@@ -79,8 +79,8 @@ async function renderUsers() {
     ul_user.append(li);
 
     if (user.userId == userId) {
-      span.style.backgroundColor = "blue";
-      span.style.color = "white";
+      span.style.backgroundColor = "rgb(173, 172, 172)";
+      span.style.color = "rgb(247, 0, 0)";
     }
 
     li.onclick = (event) => {
@@ -164,7 +164,7 @@ mic.onclick = () => {
 };
 listen.onresult = (event) => {
   let arg = event.results[0][0].transcript;
-  searchinput.textContent = arg;
+  searchinput.value = arg;
 };
 renderUsers();
 renderImages();
