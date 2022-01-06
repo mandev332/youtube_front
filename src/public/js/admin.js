@@ -1,6 +1,5 @@
 let localuserId = localStorage.getItem("token");
 if (!localuserId) {
-  console.log("admin");
   window.location = "/login";
 }
 

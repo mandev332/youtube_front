@@ -27,6 +27,7 @@ async function renderImages(userId) {
       );
     li.className = "iframe";
     video.setAttribute("src", backendApi + image.imageUrl);
+    console.log(image.imageUrl);
     video.setAttribute("controls", "");
     div.className = "iframe-footer";
     let link = imagges.find((el) => el.userId == image.userId);
@@ -36,6 +37,7 @@ async function renderImages(userId) {
       iconadmin ? backendApi + iconadmin.imageUrl : "./img/avatar.jpg"
     );
     img.setAttribute("src", backendApi + link.imageUrl);
+
     img.setAttribute("alt", "channel-icon");
     div2.className = "iframe-footer-text";
     h2.className = "channel-name";
@@ -45,8 +47,8 @@ async function renderImages(userId) {
     time.className = "uploaded-time";
     time.textContent = image.data;
     a.className = "download";
-
-    a.setAttribute("href", backendApi + "/download/" + image.imageLink);
+    let imageUrl = image.imageUrl.split("/")[2];
+    a.setAttribute("href", backendApi + "/download/" + imageUrl);
     span.textContent = image.memory;
 
     img2.setAttribute("src", "./img/download.png");
@@ -95,7 +97,9 @@ search.onclick = async (event) => {
   const imagges = await request("/files2");
   let localuserId = localStorage.getItem("userId");
   let videos = await request("/images");
-  videos = videos.filter((vid) => vid.imageTitle.includes(searchinput.value));
+  videos = videos.filter((vid) =>
+    vid.imageTitle.toLowerCase().includes(searchinput.value)
+  );
   for (let image of videos) {
     const [li, video, div, img, div2, h2, h3, time, a, span, img2] =
       createElements(
@@ -125,9 +129,9 @@ search.onclick = async (event) => {
     img.setAttribute("alt", "channel-icon");
     div2.className = "iframe-footer-text";
     h2.className = "channel-name";
-    h2.textContent = image.imageLink;
+    h2.textContent = image.imageTitle;
     h3.className = "iframe-title";
-    h3.textContent = image.imageTitle;
+    h3.textContent = image.imageLink;
     time.className = "uploaded-time";
     time.textContent = image.data;
     a.className = "download";
@@ -147,7 +151,9 @@ search.onclick = async (event) => {
 
 searchinput.onkeypress = async (event) => {
   let videos = await request("/images");
-  videos = videos.filter((vid) => vid.imageTitle.includes(searchinput.value));
+  videos = videos.filter((vid) =>
+    vid.imageTitle.toLowerCase().includes(searchinput.value)
+  );
   datalist.innerHTML = "";
   for (let i of videos) {
     let option = document.createElement("option");
