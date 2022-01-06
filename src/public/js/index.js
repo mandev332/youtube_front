@@ -39,9 +39,9 @@ async function renderImages(userId) {
     img.setAttribute("alt", "channel-icon");
     div2.className = "iframe-footer-text";
     h2.className = "channel-name";
-    h2.textContent = image.imageLink;
+    h2.textContent = image.imageTitle;
     h3.className = "iframe-title";
-    h3.textContent = image.imageTitle;
+    h3.textContent = image.imageLink;
     time.className = "uploaded-time";
     time.textContent = image.data;
     a.className = "download";

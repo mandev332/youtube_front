@@ -1,5 +1,6 @@
 let localuserId = localStorage.getItem("token");
 if (!localuserId) {
+  console.log("admin");
   window.location = "/login";
 }
 
@@ -24,6 +25,13 @@ async function renderVideoss(userId) {
     img.setAttribute("width", "25px");
     img.setAttribute("data-id", image.userId);
 
+    img.onclick = async (event) => {
+      event.preventDefault();
+      let reas = await request("/images", "DELETE", { video: image.imageUrl });
+      renderVideoss(userId);
+      let res = await reas;
+    };
+
     li.append(video, p, img);
     list.append(li);
   }
@@ -32,7 +40,7 @@ async function renderVideoss(userId) {
 submitButton.onclick = async (event) => {
   try {
     if (!videoInput.value || uploadInput.value.length == 0) {
-      alert("You must input avatar image!");
+      alert("You must input data!");
       return;
     }
     let userId = localStorage.getItem("userId");
