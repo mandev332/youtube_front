@@ -6,7 +6,6 @@ if (localuserId) {
 submitButton.onclick = async (event) => {
   try {
     event.preventDefault();
-    console.log("ll");
     if (!usernameInput.value || !passwordInput.value) return;
 
     let newUser = {

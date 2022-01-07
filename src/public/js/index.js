@@ -27,7 +27,6 @@ async function renderImages(userId) {
       );
     li.className = "iframe";
     video.setAttribute("src", backendApi + image.imageUrl);
-    console.log(image.imageUrl);
     video.setAttribute("controls", "");
     div.className = "iframe-footer";
     let link = imagges.find((el) => el.userId == image.userId);
