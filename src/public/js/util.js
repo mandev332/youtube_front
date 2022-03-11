@@ -1,4 +1,4 @@
-const backendApi = "http://192.168.0.106:4000";
+const backendApi = "http://192.168.3.4:4000";
 
 async function request(route, method, body) {
   let headers = {

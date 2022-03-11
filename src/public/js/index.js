@@ -4,13 +4,18 @@ let avatar = document.querySelector(".avatar-img");
 let search = document.querySelector(".search-btn");
 let searchinput = document.querySelector(".search-input");
 
-async function renderImages(userId) {
+async function renderImages(userId, value) {
   let images = await request("/images" + (userId ? "?userId=" + userId : ""));
-
+  if (value) {
+    images = images.filter((vid) =>
+      vid.imageTitle.toLowerCase().includes(value)
+    );
+  }
   ul.innerHTML = null;
   const imagges = await request("/files2");
+  const users = await request("/users");
   let localuserId = localStorage.getItem("userId");
-  for (let image of images) {
+  for (let video1 of images) {
     const [li, video, div, img, div2, h2, h3, time, a, span, img2] =
       createElements(
         "li",
@@ -26,10 +31,10 @@ async function renderImages(userId) {
         "img"
       );
     li.className = "iframe";
-    video.setAttribute("src", backendApi + image.imageUrl);
+    video.setAttribute("src", backendApi + video1.imageUrl);
     video.setAttribute("controls", "");
     div.className = "iframe-footer";
-    let link = imagges.find((el) => el.userId == image.userId);
+    let link = imagges.find((el) => el.userId == video1.userId);
     let iconadmin = imagges.find((el) => el.userId == localuserId);
     avatar.setAttribute(
       "src",
@@ -40,15 +45,15 @@ async function renderImages(userId) {
     img.setAttribute("alt", "channel-icon");
     div2.className = "iframe-footer-text";
     h2.className = "channel-name";
-    h2.textContent = image.imageTitle;
+    h2.textContent = video1.imageTitle;
     h3.className = "iframe-title";
-    h3.textContent = image.imageLink;
+    h3.textContent = users.find((el) => el.userId == video1.userId).username;
     time.className = "uploaded-time";
-    time.textContent = image.data;
+    time.textContent = video1.data;
     a.className = "download";
-    let imageUrl = image.imageUrl.split("/")[2];
+    let imageUrl = video1.imageUrl.split("/")[2];
     a.setAttribute("href", backendApi + "/download/" + imageUrl);
-    span.textContent = image.memory;
+    span.textContent = video1.memory;
 
     img2.setAttribute("src", "./img/download.png");
 
@@ -92,60 +97,7 @@ async function renderUsers() {
 
 search.onclick = async (event) => {
   event.preventDefault();
-  ul.innerHTML = null;
-  const imagges = await request("/files2");
-  let localuserId = localStorage.getItem("userId");
-  let videos = await request("/images");
-  videos = videos.filter((vid) =>
-    vid.imageTitle.toLowerCase().includes(searchinput.value)
-  );
-  for (let image of videos) {
-    const [li, video, div, img, div2, h2, h3, time, a, span, img2] =
-      createElements(
-        "li",
-        "video",
-        "div",
-        "img",
-        "div",
-        "h2",
-        "h3",
-        "time",
-        "a",
-        "span",
-        "img"
-      );
-    li.className = "iframe";
-    video.setAttribute("src", backendApi + image.imageUrl);
-    video.setAttribute("controls", "");
-    div.className = "iframe-footer";
-    let link = imagges.find((el) => el.userId == image.userId);
-    let iconadmin = imagges.find((el) => el.userId == localuserId);
-    avatar.setAttribute(
-      "src",
-      iconadmin ? backendApi + iconadmin.imageUrl : "./img/avatar.jpg"
-    );
-    img.setAttribute("src", backendApi + link.imageUrl);
-    img.setAttribute("alt", "channel-icon");
-    div2.className = "iframe-footer-text";
-    h2.className = "channel-name";
-    h2.textContent = image.imageTitle;
-    h3.className = "iframe-title";
-    h3.textContent = image.imageLink;
-    time.className = "uploaded-time";
-    time.textContent = image.data;
-    a.className = "download";
-
-    a.setAttribute("href", backendApi + "/download/" + image.imageLink);
-    span.textContent = image.memory;
-
-    img2.setAttribute("src", "./img/download.png");
-
-    a.append(span, img2);
-    div2.append(h2, h3, time, a);
-    div.append(img, div2);
-    li.append(video, div);
-    ul.append(li);
-  }
+  renderImages(undefined, searchinput.value);
 };
 
 searchinput.onkeypress = async (event) => {
@@ -156,7 +108,7 @@ searchinput.onkeypress = async (event) => {
   datalist.innerHTML = "";
   for (let i of videos) {
     let option = document.createElement("option");
-    option.value = i.imageTitle;
+    option.value = i.imageTitle.toLowerCase();
     datalist.append(option);
   }
 };
@@ -170,6 +122,7 @@ mic.onclick = () => {
 listen.onresult = (event) => {
   let arg = event.results[0][0].transcript;
   searchinput.value = arg;
+  renderImages(undefined, searchinput.value);
 };
 renderUsers();
 renderImages();

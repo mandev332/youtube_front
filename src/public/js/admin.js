@@ -19,6 +19,15 @@ async function renderVideoss(userId) {
     p.className = "content";
     p.textContent = image.imageTitle;
     p.setAttribute("contenteditable", "true");
+    p.onkeyup = async (event) => {
+      if (event.keyCode != 13) return;
+      const respons = await request("/images", "PUT", {
+        imageTitle: p.textContent,
+        url: image.imageUrl,
+      });
+      console.log(await respons);
+      p.blur();
+    };
     img.className = "delete-icon";
     img.setAttribute("src", "./img/delete.png");
     img.setAttribute("width", "25px");
